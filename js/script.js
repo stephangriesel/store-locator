@@ -32,4 +32,30 @@ function initMap() {
         }
     ];
 
+    stores.forEach(function(store){
+        markStore(store);
+    });
+
+    function markStore(storeInfo) {
+        // create marker & set position 
+        var marker = new google.maps.Marker({
+            map: map,
+            position: storeInfo.location,
+            title: storeInfo.name
+        });
+
+        // show store info when marker is clicked
+        marker.addListener('click',function(){
+            showStoreInfo(storeInfo);
+        });
+    }
+
+    // show store info in text box
+    function showStoreInfo(storeInfo){
+        var info_div = document.getElementById('info_div');
+        info_div.innerHTML = "Store name: "
+        + storeInfo.name
+        + "<br>Hours: " + storeInfo.hours;
+    }
+
 }
